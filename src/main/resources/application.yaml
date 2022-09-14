@@ -16,6 +16,8 @@ spring:
       enabled: true
   application:
     name: spring-user-service
+  config:
+    import: optional:configserver:http://localhost:8888    
 
 eureka:
   client:
@@ -25,4 +27,15 @@ eureka:
       enabled: true
   instance:
     prefer-ip-address: true
-   
+    
+app:
+ owner: user
+ 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+         
+
