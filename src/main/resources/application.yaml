@@ -17,7 +17,9 @@ spring:
   application:
     name: spring-user-service
   config:
-    import: optional:configserver:http://localhost:8888    
+    import: optional:configserver:http://localhost:8888
+   
+        
 
 eureka:
   client:

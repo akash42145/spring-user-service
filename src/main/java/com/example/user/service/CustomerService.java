@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.user.exception.CustomerNotFoundException;
+import com.example.user.exception.NotEnoughCreditsException;
 import com.example.user.model.Customer;
 import com.example.user.repository.CustomerReposirory;
 
@@ -24,6 +26,19 @@ public class CustomerService {
 
 	public List<Customer> getAllCustomer() {		
 		return repository.findAll();
+	}
+
+	public Customer updateCustomerCredits(int id, long credits) {
+		Customer c = repository.findById(id).orElseThrow(() -> new CustomerNotFoundException("No Customer is not found for this id: "+ id));
+		long availableCredits = c.getCredits();
+		
+		if(availableCredits < credits) {
+			throw new NotEnoughCreditsException("Not Enough Credits, Available: "+ availableCredits + ", Required Credits: "+ credits);
+		}
+
+		 repository.updateCredits(id, availableCredits - credits);
+
+		return c;
 	}
 	
 

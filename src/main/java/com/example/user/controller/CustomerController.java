@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.user.http.client.ProductClient;
 import com.example.user.model.Customer;
 import com.example.user.service.CustomerService;
 
@@ -27,8 +26,6 @@ public class CustomerController {
 	@Value("${app.owner}")
 	private String owner;
 	
-	@Autowired
-	private ProductClient productClient;
 	
 	@PostMapping
 	public Customer createCustomer(@RequestBody Customer customer) {
@@ -48,9 +45,10 @@ public class CustomerController {
 		
 	}
 	
-	@GetMapping("/product/{id}")
-	public String getProduct(@PathVariable int id) {
-		return productClient.getProduct(id);
+	
+	@GetMapping("update-credits/{id}")
+	public Customer updateCustomerCredits(@PathVariable int id, long credits ) {
+		return service.updateCustomerCredits(id, credits);
 		
 	}
 	
