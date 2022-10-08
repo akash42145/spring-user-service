@@ -13,7 +13,7 @@ public interface CustomerReposirory extends JpaRepository<Customer, Integer> {
 
 	@Transactional
 	@Modifying
-	@Query("update Customer set credist = :credits where id = :id")
-	public Integer updateCredits(int id, long cre);
+	@Query("update Customer set credits = :credits where id = :id")
+	public Integer updateCredits(int id, double credits);
 
 }

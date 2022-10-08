@@ -28,9 +28,9 @@ public class CustomerService {
 		return repository.findAll();
 	}
 
-	public Customer updateCustomerCredits(int id, long credits) {
+	public Customer updateCustomerCredits(int id, double credits) {
 		Customer c = repository.findById(id).orElseThrow(() -> new CustomerNotFoundException("No Customer is not found for this id: "+ id));
-		long availableCredits = c.getCredits();
+		double availableCredits = c.getCredits();
 		
 		if(availableCredits < credits) {
 			throw new NotEnoughCreditsException("Not Enough Credits, Available: "+ availableCredits + ", Required Credits: "+ credits);
